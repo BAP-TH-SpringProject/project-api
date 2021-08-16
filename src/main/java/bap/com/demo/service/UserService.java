@@ -1,4 +1,4 @@
-package bap.com.demo;
+package bap.com.demo.service;
 
 import java.util.List;
 import java.util.Optional;
@@ -7,33 +7,36 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import bap.com.demo.model.Users;
+import bap.com.demo.repository.UserRepository;
+
 
 @Service
 @Transactional
 public class UserService {
 
     @Autowired
-    private UserRepository repo;
+    private UserRepository repoUser;
 
     public List<Users> findAll(){
-        return repo.findAll();
+        return repoUser.findAll();
     }
 
     public Users save(Users users) {
-        return repo.save(users);
+        return repoUser.save(users);
     }
 
     public Optional<Users> findById(Long id) {
-        return repo.findById(id);
+        return repoUser.findById(id);
     }
 
 
     public void delete(long id) {
-        repo.deleteById(id);
+    	repoUser.deleteById(id);
     }
 
 	public void update(long id, Users users) {
-		repo.save(users);
+		repoUser.save(users);
 
 	}
 

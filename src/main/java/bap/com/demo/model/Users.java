@@ -1,4 +1,4 @@
-package bap.com.demo;
+package bap.com.demo.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,8 +11,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "file")
 public class Users {
     private Long id_user;
-
-
 	private String user_name;
 	private String full_name;
     private String password;
