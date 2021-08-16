@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<title>Product Manager</title>
+</head>
+<body>
+	<div align="center">
+		<h1>Product List</h1>
+		<button>
+			<a href="/new" style="text-decoration: none">Add Product</a>
+		</button>
+		<br /> <br />
+		<table border="1" cellpadding="10"
+			style="border-collapse: collapse; border: 1px solid black; width: 70%">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>User Name</th>
+					<th>Full Name</th>
+					<th>Password</th>
+					<th>Email</th>
+					<th>Phone</th>
+					<th>Address</th>
+					<th>Blance</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="users : ${listUsers}">
+					<td th:text="${users.id_user}">ID</td>
+					<td th:text="${users.user_name}">User Name</td>
+					<td th:text="${users.full_name}">Full Name</td>
+					<td th:text="${users.password}">Password</td>
+					<td th:text="${users.email}">Email</td>
+					<td th:text="${users.phone}">Phone</td>
+					<td th:text="${users.address}">Address</td>
+					<td th:text="${users.balance}">Balance</td>
+					<td>
+						<button type="button" class="btn btn-success">
+							<a th:href="@{/edit/{id_user}(id_user=${users.id_user})}"
+								style="text-decoration: none">Edit</a>
+						</button> &nbsp;&nbsp;&nbsp;
+						<button name="delete" class="btn btn-danger" type="submit">
+							<a th:href="@{/delete/{id_user}(id_user= ${users.id_user})}"
+								style="text-decoration: none"> Delete </a>
+						</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>
