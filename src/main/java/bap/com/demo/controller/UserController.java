@@ -22,16 +22,16 @@ import bap.com.demo.service.UserService;
 @RestController
 //@Controller + ResponseBODY
 @RequestMapping("/api")
-public class AppController {
+public class UserController {
 
 	@Autowired
-	private UserService service;
+	private UserService Userservice;
 
 	//Get List Data
 	@GetMapping("/")
 
 	public ResponseEntity<List<Users>> getListUser() {
-		return new ResponseEntity<>((List<Users>) service.findAll(), HttpStatus.OK);
+		return new ResponseEntity<>((List<Users>) Userservice.findAll(), HttpStatus.OK);
 
 	}
 
@@ -39,7 +39,7 @@ public class AppController {
 	@GetMapping("/user/{id}")
 	public ResponseEntity<Users> getUser(@PathVariable("id") Long id) {
 		// @PathVariable lay ra thông tin trong URL
-		Optional<Users> userOptional = service.findById(id);
+		Optional<Users> userOptional = Userservice.findById(id);
 		return userOptional.map(users -> new ResponseEntity<>(users, HttpStatus.OK))
 				.orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
 
@@ -51,8 +51,8 @@ public class AppController {
 	public ResponseEntity<List<Users>> createUser(@RequestBody Users users) {
 
 		System.out.println("Data" + users);
-		service.save(users);
-		return new ResponseEntity<>((List<Users>) service.findAll(), HttpStatus.CREATED);
+		Userservice.save(users);
+		return new ResponseEntity<>((List<Users>) Userservice.findAll(), HttpStatus.CREATED);
 	}
 
 	// Update user by Id
@@ -60,10 +60,10 @@ public class AppController {
 
 	public ResponseEntity<Users> updateUser(@PathVariable("id") Long id,
 			@RequestBody Users users) {
-		Optional<Users> userOptional = service.findById(id);
+		Optional<Users> userOptional = Userservice.findById(id);
 		return (ResponseEntity<Users>) userOptional.map(users1 -> {
 			users.setId_user(users1.getId_user());
-			return new ResponseEntity<>(service.save(users), HttpStatus.OK);
+			return new ResponseEntity<>(Userservice.save(users), HttpStatus.OK);
 		}).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
 
 	}
@@ -72,9 +72,9 @@ public class AppController {
 	@DeleteMapping("/delete/{id}")
 
 	public ResponseEntity<List<Users>> delete(@PathVariable long id) {
-		service.delete(id);
+		Userservice.delete(id);
 		// Tra ve response voi STATUS CODE = 200 (OK)
-		return new ResponseEntity<>((List<Users>) service.findAll(), HttpStatus.OK);
+		return new ResponseEntity<>((List<Users>) Userservice.findAll(), HttpStatus.OK);
 	}
 
 }

@@ -6,6 +6,4 @@ import bap.com.demo.model.Users;
 
 public interface UserRepository extends JpaRepository<Users, Long> {
 
-
-
 }

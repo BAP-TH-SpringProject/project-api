@@ -4,11 +4,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
-import org.springframework.boot.context.properties.ConfigurationProperties;
+import javax.persistence.Table;
 
 @Entity
-@ConfigurationProperties(prefix = "file")
+@Table(name = "Users")
 public class Users {
     private Long id_user;
 	private String user_name;
