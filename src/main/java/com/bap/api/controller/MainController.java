@@ -43,28 +43,25 @@ public class MainController {
     @Autowired
     private PasswordEncoder bcryptEncoder;
 
-    // Đăng ký
+    // Register the account
     @PostMapping("/register")
-    public ResponseEntity<?> saveUser(@RequestBody JwtRequest user) throws Exception {
-        String userRequest = user.getUsername();
-        System.out.println("User Name on request: " + userRequest);
-        return null;
-//        return ResponseEntity.ok(userDetailsService.save(user));
+    public ResponseEntity<?> saveUser(@RequestBody UserDTO user) throws Exception {
+        return ResponseEntity.ok(userDetailsService.save(user));
     }
 
-    // Xác thực đăng nhập
+    // Login Authentication
     @PostMapping("/authenticate")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authRequest) throws Exception {
-        String userRequest = authRequest.getUsername();
+        String userRequest = authRequest.getUserName();
         System.out.println("User Name on request: " + userRequest);
-        authenticate(authRequest.getUsername(), authRequest.getPassword());
-        final UserDetails userDetails = userDetailsService.loadUserByUsername(authRequest.getUsername());
+        authenticate(authRequest.getUserName(), authRequest.getPassword());
+        final UserDetails userDetails = userDetailsService.loadUserByUsername(authRequest.getUserName());
 
         final String token = jwtTokenUtil.generateToken(userDetails);
 
         return ResponseEntity.ok(new JwtResponse(token));
     }
-    // Xác thực đăng nhập
+    // Authentication
     private void authenticate(String username, String password) throws Exception {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
@@ -75,7 +72,7 @@ public class MainController {
         }
     }
     
-    // Lấy thông tin sản phẩm
+    // Get All Products
     @GetMapping(path = "/all")
     public @ResponseBody Iterable<Products> getAllProducts() {
         String key = bcryptEncoder.encode("123456");

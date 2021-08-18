@@ -26,7 +26,7 @@ class gets executed. It checks if the request has a valid JWT token. If it has a
  */
 
 @Component
-public class JwtRequestFilter extends OncePerRequestFilter {
+public class JwtRequestFilter extends OncePerRequestFilter{
 
     @Autowired
     private JwtUserDetailsService jwtUserDetailsService;

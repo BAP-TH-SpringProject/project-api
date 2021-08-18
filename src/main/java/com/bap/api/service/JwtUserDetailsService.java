@@ -40,29 +40,30 @@ public class JwtUserDetailsService implements UserDetailsService {
 //    @Autowired
 //    private org.apache.logging.log4j.core.Logger logger;
     
-// Search for users by user name (Tìm Kiếm user thông qua user name)
+// Search for users by user name
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        
-         //logger.warn("User Name: " + username);
         System.out.println("User Name: " + username);
         Users user = userDao.findByUsername(username);
         if (user == null) {
-            // Nếu không tìm thấy thì thông báo không tồn tại user này
             throw new UsernameNotFoundException("User not found with username: " + username);
         }
-        // Nếu tìm thấy User thì truyền tài khoản mật khẩu vào và xác thực
-        // User này là của thư viện security (org.springframework.security.core.userdetails.User;)
-        return new User(user.getUser_name(), user.getPassword(),
+        // User Object in Java Security library
+        return new User(user.getUserName(), user.getPassword(),
                 new ArrayList<>());
     }
 
-    // Create a user in the database (Tạo user trong database)
+    // Create a new user in the database
     public Users save(UserDTO user) {
         Users newUser = new Users();
-        newUser.setUser_name(user.getUser_name());
+        newUser.setUserName(user.getUserName());
+        newUser.setFullName(user.getFullName());
+        newUser.setEmail(user.getEmail());
         // set password is encrypted
         newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
+        newUser.setPhone(user.getPhone());
+        newUser.setAddress(user.getAddress());
+        newUser.setBalance(user.getBalance());
         return userDao.save(newUser);
     }
 }
