@@ -4,8 +4,21 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class AppMain {
+/**
+ *
+ * This is an application
+ *
+ */
+
+public class Main {
+    /**
+     * The main method
+     *
+     * @param args - an array of String values
+     */
     public static void main(String[] args) {
-        SpringApplication.run(AppMain.class, args);
+        SpringApplication.run(Main.class, args);
+
     }
+
 }
