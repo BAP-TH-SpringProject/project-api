@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import com.bap.api.model.entity.Users;
 
 @Repository
-public interface UserRepository extends JpaRepository<Users, Integer> {
-    @Query("select u from Users u where u.user_name = ?1")
-    Users findByUsername(String user_name);
+public interface UserRepository extends JpaRepository<Users, Long> {
+    @Query("select u from Users u where u.userName = ?1")
+    Users findByUsername(String userName);
 }

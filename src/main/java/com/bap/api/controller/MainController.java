@@ -78,6 +78,6 @@ public class MainController {
         String key = bcryptEncoder.encode("123456");
         System.out.println("Password Encoder: " + key);
         // This returns a JSON or XML with the users
-        return product.getAll();
+        return product.findAll();
     }
 }

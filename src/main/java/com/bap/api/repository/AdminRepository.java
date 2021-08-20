@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.bap.api.model.entity.Administrator;
 
 @Repository
-public interface AdminRepository extends CrudRepository<Administrator, Integer> {
+public interface AdminRepository extends CrudRepository<Administrator, Long> {
     @Query("select u from Users u where u.email = :email")
     Administrator findAdministrator(@Param("email") String email);
 }
