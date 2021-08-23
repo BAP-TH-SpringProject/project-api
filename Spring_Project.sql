@@ -46,12 +46,6 @@ create table USERS (
     roles integer,
     balance double
     );
- create table ADMINISTRATOR (
-    id int primary key auto_increment UNIQUE,
-    password varchar(500) NOT NULL,
-    email varchar (200) NOT NULL UNIQUE
-     );
- insert into ADMINISTRATOR values (1,'$2a$10$sopEWnd9jx6nKZNowe5TpukYE62CGhKBnIkU20AneNesoFbAQpIpu','lilpham987@gmail.com');
 insert into USERS (id_user,user_name,full_name,password,email,phone, address, balance, roles) values
  (1, 'admin','admin','$2a$10$sopEWnd9jx6nKZNowe5TpukYE62CGhKBnIkU20AneNesoFbAQpIpu','tuan.pham22@student.passerellesnumeriques.org',0799101759,'DANANG',200000, 0);
 insert into USERS (user_name,full_name,password,email,phone, address, balance, roles) values
