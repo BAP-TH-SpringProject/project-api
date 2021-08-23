@@ -13,15 +13,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bap.api.model.entity.Payments;
 import com.bap.api.service.PaymentService;
 
-//@CrossOrigin(origins = "http://localhost:8081")
 @RestController
-//@Controller + ResponseBODY
-//@RequestMapping("/api")
+@RequestMapping("/admin")
 /**
  * The PaymentController is the class that help admin can manage products
  *

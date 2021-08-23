@@ -18,8 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.bap.api.model.entity.Products;
 import com.bap.api.service.ProductService;
 
-//@CrossOrigin(origins = "http://localhost:8081")
-//@Controller + ResponseBODY
 @RestController
 @RequestMapping("/admin")
 /**

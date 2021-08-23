@@ -1,10 +1,16 @@
 package com.bap.api.service;
 
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -14,6 +20,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.bap.api.config.mail.MyConstants;
 import com.bap.api.model.dto.UserDTO;
 import com.bap.api.model.entity.Users;
 import com.bap.api.repository.UserRepository;
@@ -34,7 +41,9 @@ public class JwtUserDetailsService implements UserDetailsService {
     // to query in the database
     @Autowired
     private UserRepository repoUser;
-
+    //Send Email
+    @Autowired
+    private EmailService sendEmail; 
     // Password Encoder
     @Autowired
     private PasswordEncoder bcryptEncoder;
@@ -52,6 +61,7 @@ public class JwtUserDetailsService implements UserDetailsService {
         }
         // User Object in Java Security library
         List<GrantedAuthority> grantList = new ArrayList<GrantedAuthority>();
+        //Set Authorization
         if(user.getRoles() == 0) {
             GrantedAuthority authority = new SimpleGrantedAuthority("ADMIN");
             grantList.add(authority);
@@ -75,9 +85,24 @@ public class JwtUserDetailsService implements UserDetailsService {
     public void forgetPassword(String email) {
         Users user = repoUser.findByEmail(email);
         if (user == null) {
-            throw new UsernameNotFoundException("User not found with username: " + email);
+            throw new UsernameNotFoundException("User not found with email: " + email);
         }
-        
+        int min = 10000;
+        int max = 99999;      
+        //Generate random int value from min to max 
+        int random_int = (int)Math.floor(Math.random()*(max-min+1)+min);
+//        byte[] array = new byte[7]; // length is bounded by 7
+//        new Random().nextBytes(array);
+        String generatedString = "New_" + random_int;
+        try {
+            sendEmail.sendHtmlEmail(email, "New Password Of Teddy Website", "New Password: "+generatedString); 
+            user.setPassword(bcryptEncoder.encode(generatedString));
+            System.out.println(generatedString);
+            repoUser.save(user);
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+
     }
     // Create a new user in the database
     public Users save(UserDTO user) {

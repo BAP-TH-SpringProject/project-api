@@ -21,10 +21,6 @@ import com.bap.api.model.entity.Users;
 import com.bap.api.service.JwtUserDetailsService;
 import com.bap.api.service.UserService;
 
-
-
-//@CrossOrigin(origins = "http://localhost:8081")
-//@Controller + ResponseBODY
 @RestController
 /**
  * The UserService is the class that help admin can manage users
@@ -53,7 +49,6 @@ public class UserController {
     public ResponseEntity<?> saveUser(@RequestBody UserDTO user) throws Exception {
         return ResponseEntity.ok(userDetailsService.save(user));
     }
-
     @GetMapping("/user/{id}")
     /**
      * This is a method to get all user by id

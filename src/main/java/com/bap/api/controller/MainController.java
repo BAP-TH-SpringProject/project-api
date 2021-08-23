@@ -42,8 +42,6 @@ public class MainController {
     // Login Authentication
     @PostMapping("/login")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authRequest) throws Exception {
-//        String userRequest = authRequest.getUserName();
-//        System.out.println("User Name on request: " + userRequest);
         authenticate(authRequest.getUserName(), authRequest.getPassword());
         int role = userDetailsService.getRoles(authRequest.getUserName());
         final UserDetails userDetails = userDetailsService.loadUserByUsername(authRequest.getUserName());
