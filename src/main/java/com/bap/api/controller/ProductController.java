@@ -21,7 +21,7 @@ import com.bap.api.service.ProductService;
 //@CrossOrigin(origins = "http://localhost:8081")
 //@Controller + ResponseBODY
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/admin")
 /**
  * The ProductController is the class that help admin can manage products
  *

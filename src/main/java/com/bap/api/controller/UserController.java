@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bap.api.model.entity.Users;
@@ -22,7 +23,6 @@ import com.bap.api.service.UserService;
 //@CrossOrigin(origins = "http://localhost:8081")
 //@Controller + ResponseBODY
 @RestController
-//@RequestMapping("/api")
 /**
  * The UserService is the class that help admin can manage users
  *
@@ -33,8 +33,8 @@ public class UserController {
 
     @Autowired
     private UserService Userservice;
-
-    @GetMapping("/users")
+    
+    @GetMapping("admin/users")
     /**
      * This is a method to get all users
      *

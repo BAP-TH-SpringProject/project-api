@@ -1,20 +1,21 @@
 package com.bap.api.service;
 
 import java.util.ArrayList;
-
-import com.bap.api.model.entity.Users;
-import com.bap.api.model.dto.UserDTO;
-import com.bap.api.repository.UserRepository;
-
-import ch.qos.logback.classic.Logger;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.security.core.userdetails.User;
+
+import com.bap.api.model.dto.UserDTO;
+import com.bap.api.model.entity.Users;
+import com.bap.api.repository.UserRepository;
 
 /*
 JWTUserDetailsService implements the Spring Security UserDetailsService interface.
@@ -49,10 +50,28 @@ public class JwtUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException("User not found with username: " + username);
         }
         // User Object in Java Security library
-        return new User(user.getUserName(), user.getPassword(),
-                new ArrayList<>());
+        List<GrantedAuthority> grantList = new ArrayList<GrantedAuthority>();
+        System.out.println("User Name: " + user);
+        System.out.println("Role: "+user.getRoles());
+        if(user.getRoles() == 0) {
+            GrantedAuthority authority = new SimpleGrantedAuthority("ADMIN");
+            grantList.add(authority);
+        }else {
+            GrantedAuthority authority = new SimpleGrantedAuthority("USER"); 
+            grantList.add(authority);
+        }
+        return new User(user.getUserName(), user.getPassword(),grantList);
     }
-
+    public int getRoles(String username) {
+        Users user = userDao.findByUsername(username);
+        if (user == null) {
+            return 1;
+        }
+        if(user.getRoles() == 0) {
+            return 0;
+        }
+        return 1;
+    }
     // Create a new user in the database
     public Users save(UserDTO user) {
         Users newUser = new Users();

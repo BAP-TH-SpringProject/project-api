@@ -58,14 +58,11 @@ public class JwtRequestFilter extends OncePerRequestFilter{
             logger.warn("JWT Token does not begin with Bearer String");
         }
 
-        // Once we get the token validate it (Sau khi nhận được token).
+        // Once we get the token validate it.
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 
             UserDetails userDetails = this.jwtUserDetailsService.loadUserByUsername(username);
-
             // if token is valid configure Spring Security to manually set authentication
-            // nếu token hợp lệ, định cấu hình Spring Security để thiết lập xác thực theo
-            // cách thủ công
             if (jwtTokenUtil.validateToken(jwtToken, userDetails)) {
                 UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
                         userDetails, null, userDetails.getAuthorities());
@@ -74,9 +71,6 @@ public class JwtRequestFilter extends OncePerRequestFilter{
                 // After setting the Authentication in the context, we specify ()
                 // that the current user is authenticated. So it passes the
                 // Spring Security Configurations successfully.
-                // Sau khi đặt Xác thực trong context, chúng ta chỉ định mà người dùng hiện tại
-                // được xác thực.
-                // Vì vậy Cấu hình spring security thành công.
                 SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
             }
         }
