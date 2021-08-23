@@ -32,9 +32,6 @@ import com.bap.api.service.ProductService;
 @RestController
 public class MainController {
     @Autowired
-    private ProductService product;
-
-    @Autowired
     private AuthenticationManager authenticationManager;
 
     @Autowired
@@ -42,13 +39,6 @@ public class MainController {
 
     @Autowired
     private JwtUserDetailsService userDetailsService;
-
-    // Register the account
-    @PostMapping("/register")
-    public ResponseEntity<?> saveUser(@RequestBody UserDTO user) throws Exception {
-        return ResponseEntity.ok(userDetailsService.save(user));
-    }
-
     // Login Authentication
     @PostMapping("/login")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authRequest) throws Exception {

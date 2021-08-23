@@ -2,6 +2,7 @@ package com.bap.api.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -32,7 +33,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 
     // to query in the database
     @Autowired
-    private UserRepository userDao;
+    private UserRepository repoUser;
 
     // Password Encoder
     @Autowired
@@ -45,14 +46,12 @@ public class JwtUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         System.out.println("User Name: " + username);
-        Users user = userDao.findByUsername(username);
+        Users user = repoUser.findByUsername(username);
         if (user == null) {
             throw new UsernameNotFoundException("User not found with username: " + username);
         }
         // User Object in Java Security library
         List<GrantedAuthority> grantList = new ArrayList<GrantedAuthority>();
-        System.out.println("User Name: " + user);
-        System.out.println("Role: "+user.getRoles());
         if(user.getRoles() == 0) {
             GrantedAuthority authority = new SimpleGrantedAuthority("ADMIN");
             grantList.add(authority);
@@ -63,7 +62,7 @@ public class JwtUserDetailsService implements UserDetailsService {
         return new User(user.getUserName(), user.getPassword(),grantList);
     }
     public int getRoles(String username) {
-        Users user = userDao.findByUsername(username);
+        Users user = repoUser.findByUsername(username);
         if (user == null) {
             return 1;
         }
@@ -71,6 +70,14 @@ public class JwtUserDetailsService implements UserDetailsService {
             return 0;
         }
         return 1;
+    }
+    // Forget Password
+    public void forgetPassword(String email) {
+        Users user = repoUser.findByEmail(email);
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found with username: " + email);
+        }
+        
     }
     // Create a new user in the database
     public Users save(UserDTO user) {
@@ -83,6 +90,6 @@ public class JwtUserDetailsService implements UserDetailsService {
         newUser.setPhone(user.getPhone());
         newUser.setAddress(user.getAddress());
         newUser.setBalance(user.getBalance());
-        return userDao.save(newUser);
+        return repoUser.save(newUser);
     }
 }

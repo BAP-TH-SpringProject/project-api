@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bap.api.model.dto.UserDTO;
 import com.bap.api.model.entity.Users;
+import com.bap.api.service.JwtUserDetailsService;
 import com.bap.api.service.UserService;
 
 
@@ -30,7 +33,8 @@ import com.bap.api.service.UserService;
  *
  */
 public class UserController {
-
+    @Autowired
+    private JwtUserDetailsService userDetailsService;
     @Autowired
     private UserService Userservice;
     
@@ -43,6 +47,11 @@ public class UserController {
     public ResponseEntity<List<Users>> getListUser() {
         return new ResponseEntity<>((List<Users>) Userservice.findAll(), HttpStatus.OK);
 
+    }
+    // Register the account
+    @PostMapping("/register")
+    public ResponseEntity<?> saveUser(@RequestBody UserDTO user) throws Exception {
+        return ResponseEntity.ok(userDetailsService.save(user));
     }
 
     @GetMapping("/user/{id}")
@@ -60,19 +69,19 @@ public class UserController {
 
     }
 
-    @PostMapping("/addUser")
-    /**
-     * This is a method to add a user
-     *
-     * @param users
-     * @return
-     */
-    public ResponseEntity<List<Users>> createUser(@RequestBody Users users) {
-        System.out.println("Data" + users);
-
-        Userservice.save(users);
-        return new ResponseEntity<>((List<Users>) Userservice.findAll(), HttpStatus.CREATED);
-    }
+//    @PostMapping("/addUser")
+//    /**
+//     * This is a method to add a user
+//     *
+//     * @param users
+//     * @return
+//     */
+//    public ResponseEntity<List<Users>> createUser(@RequestBody Users users) {
+//        System.out.println("Data" + users);
+//
+//        Userservice.save(users);
+//        return new ResponseEntity<>((List<Users>) Userservice.findAll(), HttpStatus.CREATED);
+//    }
 
     @PutMapping("/editUser/{id}")
     /**
