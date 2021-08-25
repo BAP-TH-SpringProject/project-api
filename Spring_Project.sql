@@ -73,4 +73,12 @@ create table NOTIFICATIONS (
     status varchar(15),
     content varchar(100)
 );
+insert into NOTIFICATIONS (id,status,content) values
+ (1,'success','Demo notifications');
+ insert into NOTIFICATIONS (status,content) values
+ ('error','Demo notifications');
+  insert into NOTIFICATIONS (status,content) values
+ ('error','Demo notifications');
+  insert into NOTIFICATIONS (status,content) values
+ ('success','Demo notifications');
  select * from USERS;
