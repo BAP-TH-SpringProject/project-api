@@ -43,19 +43,18 @@ create table USERS (
     email varchar (200) NOT NULL UNIQUE,
     phone varchar (50) NOT NULL, 
     address varchar (50),
-    roles integer,
-    balance double
+    roles integer
     );
-insert into USERS (id_user,user_name,full_name,password,email,phone, address, balance, roles) values
- (1, 'admin','admin','$2a$10$sopEWnd9jx6nKZNowe5TpukYE62CGhKBnIkU20AneNesoFbAQpIpu','tuan.pham22@student.passerellesnumeriques.org',0799101759,'DANANG',200000, 0);
-insert into USERS (user_name,full_name,password,email,phone, address, balance, roles) values
- ('Kha','Nguyen Dinh kha','$2a$10$sopEWnd9jx6nKZNowe5TpukYE62CGhKBnIkU20AneNesoFbAQpIpu','kha.nguyen22@student.passerellesnumeriques.org',0915810375,'DANANG',200000, 1);
-insert into USERS (user_name,full_name,password,email,phone, address, balance, roles) values
- ('Hoa','Nguyen Thi Hoa','$2a$10$sopEWnd9jx6nKZNowe5TpukYE62CGhKBnIkU20AneNesoFbAQpIpu','hoa.nguyen22@student.passerellesnumeriques.org',0915810375,'DANANG',200000, 1);
-insert into USERS (user_name,full_name,password,email,phone, address, balance, roles) values
- ('Dieu','Ho Thi Dieu','$2a$10$sopEWnd9jx6nKZNowe5TpukYE62CGhKBnIkU20AneNesoFbAQpIpu','dieu.ho22@student.passerellesnumeriques.org',0915810375,'DANANG',200000, 1);
-insert into USERS (user_name,full_name,password,email,phone, address, balance, roles) values
- ('Bang','Gia Cao Bang','$2a$10$sopEWnd9jx6nKZNowe5TpukYE62CGhKBnIkU20AneNesoFbAQpIpu','bang.gia22@student.passerellesnumeriques.org',0915810375,'DANANG',200000, 1);
+insert into USERS (id_user,user_name,full_name,password,email,phone, address, roles) values
+ (1, 'admin','admin','$2a$10$sopEWnd9jx6nKZNowe5TpukYE62CGhKBnIkU20AneNesoFbAQpIpu','tuan.pham22@student.passerellesnumeriques.org',0799101759,'DANANG', 0);
+insert into USERS (user_name,full_name,password,email,phone, address, roles) values
+ ('Kha','Nguyen Dinh kha','$2a$10$sopEWnd9jx6nKZNowe5TpukYE62CGhKBnIkU20AneNesoFbAQpIpu','kha.nguyen22@student.passerellesnumeriques.org',0915810375,'DANANG', 1);
+insert into USERS (user_name,full_name,password,email,phone, address, roles) values
+ ('Hoa','Nguyen Thi Hoa','$2a$10$sopEWnd9jx6nKZNowe5TpukYE62CGhKBnIkU20AneNesoFbAQpIpu','hoa.nguyen22@student.passerellesnumeriques.org',0915810375,'DANANG', 1);
+insert into USERS (user_name,full_name,password,email,phone, address, roles) values
+ ('Dieu','Ho Thi Dieu','$2a$10$sopEWnd9jx6nKZNowe5TpukYE62CGhKBnIkU20AneNesoFbAQpIpu','dieu.ho22@student.passerellesnumeriques.org',0915810375,'DANANG', 1);
+insert into USERS (user_name,full_name,password,email,phone, address, roles) values
+ ('Bang','Gia Cao Bang','$2a$10$sopEWnd9jx6nKZNowe5TpukYE62CGhKBnIkU20AneNesoFbAQpIpu','bang.gia22@student.passerellesnumeriques.org',0915810375,'DANANG', 1);
  
 ---------------------------------------------------------
 create table PAYMENTS (

@@ -28,7 +28,7 @@ import com.bap.api.service.ProductService;
 /*Cross-Origin Resource Sharing (CORS) is a security concept that allows restricting
  *  the resources implemented in web browsers. It prevents the JavaScript code producing
  *   or consuming the requests against different origin.*/
-//@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
+@CrossOrigin
 @RestController
 public class MainController {
     @Autowired

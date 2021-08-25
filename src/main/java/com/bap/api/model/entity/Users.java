@@ -36,9 +36,6 @@ public class Users {
 
     @Column(name = "address")
     private String address;
-
-    @Column(name = "balance")
-    private String balance;
     
     @Column(name = "roles")
     private Integer roles;

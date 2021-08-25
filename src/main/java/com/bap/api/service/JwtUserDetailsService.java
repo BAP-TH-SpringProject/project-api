@@ -82,7 +82,7 @@ public class JwtUserDetailsService implements UserDetailsService {
         return 1;
     }
     // Forget Password
-    public void forgetPassword(String email) {
+    public void forgotPassword(String email) {
         Users user = repoUser.findByEmail(email);
         if (user == null) {
             throw new UsernameNotFoundException("User not found with email: " + email);
@@ -91,13 +91,10 @@ public class JwtUserDetailsService implements UserDetailsService {
         int max = 99999;      
         //Generate random int value from min to max 
         int random_int = (int)Math.floor(Math.random()*(max-min+1)+min);
-//        byte[] array = new byte[7]; // length is bounded by 7
-//        new Random().nextBytes(array);
         String generatedString = "New_" + random_int;
         try {
             sendEmail.sendHtmlEmail(email, "New Password Of Teddy Website", "New Password: "+generatedString); 
             user.setPassword(bcryptEncoder.encode(generatedString));
-            System.out.println(generatedString);
             repoUser.save(user);
         } catch (Exception e) {
             // TODO: handle exception
@@ -114,7 +111,6 @@ public class JwtUserDetailsService implements UserDetailsService {
         newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
         newUser.setPhone(user.getPhone());
         newUser.setAddress(user.getAddress());
-        newUser.setBalance(user.getBalance());
         return repoUser.save(newUser);
     }
 }
