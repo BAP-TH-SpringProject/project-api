@@ -1,5 +1,7 @@
 package com.bap.api.model.dto;
 
+import com.bap.api.model.entity.Users;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,4 +12,5 @@ import lombok.NoArgsConstructor;
 public class Response {
  private int role;
  private String jwttoken;
+ private Users user;
 }

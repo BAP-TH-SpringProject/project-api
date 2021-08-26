@@ -14,10 +14,11 @@ import com.bap.api.model.entity.Notifications;
 import com.bap.api.service.NoticeService;
 
 @RestController
+@RequestMapping("/not-auth")
 public class NotificationsController {
     @Autowired
     private NoticeService notice;
-    @GetMapping("admin/notifications")
+    @GetMapping("/notifications")
     public ResponseEntity<List<Notifications>> getListUser() {
         return new ResponseEntity<>((List<Notifications>) notice.findAll(), HttpStatus.OK);
 

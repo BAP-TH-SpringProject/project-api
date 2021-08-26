@@ -30,6 +30,7 @@ import com.bap.api.service.UserService;
  * @author admin
  *
  */
+@RequestMapping("/not-auth")
 public class UserController {
     @Autowired
     private JwtUserDetailsService userDetailsService;

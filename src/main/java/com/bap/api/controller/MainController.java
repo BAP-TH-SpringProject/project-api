@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,6 +23,8 @@ import com.bap.api.model.dto.JwtResponse;
 import com.bap.api.model.dto.Response;
 import com.bap.api.model.dto.UserDTO;
 import com.bap.api.model.entity.Products;
+import com.bap.api.model.entity.Users;
+import com.bap.api.repository.UserRepository;
 import com.bap.api.service.JwtUserDetailsService;
 import com.bap.api.service.ProductService;
 
@@ -30,6 +33,7 @@ import com.bap.api.service.ProductService;
  *   or consuming the requests against different origin.*/
 @CrossOrigin
 @RestController
+//@RequestMapping("/not-auth")
 public class MainController {
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -39,6 +43,10 @@ public class MainController {
 
     @Autowired
     private JwtUserDetailsService userDetailsService;
+    
+    @Autowired
+    private UserRepository repoUser;
+    
     // Login Authentication
     @PostMapping("/login")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authRequest) throws Exception {
@@ -46,7 +54,8 @@ public class MainController {
         int role = userDetailsService.getRoles(authRequest.getUserName());
         final UserDetails userDetails = userDetailsService.loadUserByUsername(authRequest.getUserName());
         final String token = jwtTokenUtil.generateToken(userDetails);
-        return ResponseEntity.ok(new Response(role, token));
+        Users user = repoUser.findByUsername(authRequest.getUserName());
+        return ResponseEntity.ok(new Response(role, token, user));
     }
     // Authentication
     private void authenticate(String username, String password) throws Exception {
