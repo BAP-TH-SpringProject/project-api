@@ -18,11 +18,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bap.api.model.entity.Payments;
+import com.bap.api.model.entity.Users;
 import com.bap.api.service.PaymentService;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/admin")
+//@RequestMapping("/admin")
+@RequestMapping("/not-auth")
 /**
  * The PaymentController is the class that help admin can manage products
  *
@@ -39,14 +41,18 @@ public class PaymentController {
      *
      * @return
      */
-    public List<Payments> getListPayment() {
-        List<Payments> payments = new ArrayList<Payments>();
-        List<Payments> result = PaymentService.findAll();
-        for (Payments item : result) {
-            payments.add(item);
-        }
-        return payments;
+    public ResponseEntity<List<Payments>> getListUser() {
+        return new ResponseEntity<>((List<Payments>) PaymentService.findAll(), HttpStatus.OK);
+
     }
+//    public List<Payments> getListPayment() {
+//        List<Payments> payments = new ArrayList<Payments>();
+//        List<Payments> result = PaymentService.findAll();
+//        for (Payments item : result) {
+//            payments.add(item);
+//        }
+//        return payments;
+//    }
 
     @GetMapping("/payment/{id}")
     /**
@@ -84,7 +90,7 @@ public class PaymentController {
     public ResponseEntity<Payments> updatePayment(@PathVariable("id") Long id, @ModelAttribute Payments payments) {
         Optional<Payments> productOptional = PaymentService.findById(id);
         return (ResponseEntity<Payments>) productOptional.map(payment1 -> {
-            payments.setId_paid(payment1.getId_paid());
+            payments.setId(payment1.getId());
             return new ResponseEntity<>(PaymentService.save(payments), HttpStatus.OK);
         }).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
 

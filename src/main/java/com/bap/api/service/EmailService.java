@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 public class EmailService {
     @Autowired
     public JavaMailSender emailSender;
+    
     public void sendHtmlEmail(String email, String sub, String content) throws MessagingException {
         
         MimeMessage message = emailSender.createMimeMessage();

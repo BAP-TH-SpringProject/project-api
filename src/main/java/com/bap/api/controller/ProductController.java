@@ -21,7 +21,8 @@ import com.bap.api.service.ProductService;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/admin")
+//@RequestMapping("/admin")
+@RequestMapping("/not-auth")
 /**
  * The ProductController is the class that help admin can manage products
  *

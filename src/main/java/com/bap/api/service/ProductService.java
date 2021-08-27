@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.bap.api.model.dto.ProductDTO;
 import com.bap.api.model.entity.Products;
 import com.bap.api.repository.ProductRepository;
 
@@ -73,6 +74,16 @@ public class ProductService {
 
     }
 
+    public Products postProduct(ProductDTO product) {
+        Products newProduct = new Products();
+        newProduct.setProductName(product.getProductName());
+        newProduct.setProductType(product.getProductType());
+        newProduct.setImage(product.getImage());
+        newProduct.setPrice(product.getPrice());
+        newProduct.setSale(product.getSale());
+        newProduct.setDescriptions(product.getDescriptions());
+        return repoProduct.save(newProduct);
+    }
 
 
 }

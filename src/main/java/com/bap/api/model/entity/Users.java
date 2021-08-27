@@ -37,6 +37,9 @@ public class Users {
     @Column(name = "address")
     private String address;
     
+    @Column(name = "status")
+    private String status;
+    
     @Column(name = "roles")
     private Integer roles;
 }

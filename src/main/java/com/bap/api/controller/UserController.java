@@ -37,7 +37,8 @@ public class UserController {
     @Autowired
     private UserService Userservice;
     
-    @GetMapping("admin/users")
+//    @GetMapping("admin/users")
+    @GetMapping("/users")
     /**
      * This is a method to get all users
      *
@@ -93,11 +94,20 @@ public class UserController {
         Optional<Users> userOptional = Userservice.findById(id);
         return (ResponseEntity<Users>) userOptional.map(users1 -> {
             users.setId(users1.getId());
-            return new ResponseEntity<>(Userservice.save(users), HttpStatus.OK);
+            return new ResponseEntity<>(Userservice.update(users), HttpStatus.OK);
         }).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+    @GetMapping("/ban/{id}")
+    public boolean banUser(@PathVariable("id") Long id) {
+        try {
+            Userservice.banUser(id);
+            System.out.println(id);
+            return true; 
+        } catch (Exception e) {
+            return false;
+        }
 
     }
-
     @DeleteMapping("/deleteUser/{id}")
     /**
      * This is a method to delete a user by id

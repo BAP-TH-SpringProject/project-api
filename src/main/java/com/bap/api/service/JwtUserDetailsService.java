@@ -54,7 +54,6 @@ public class JwtUserDetailsService implements UserDetailsService {
 // Search for users by user name
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        System.out.println("User Name: " + username);
         Users user = repoUser.findByUsername(username);
         if (user == null) {
             throw new UsernameNotFoundException("User not found with username: " + username);
@@ -74,12 +73,14 @@ public class JwtUserDetailsService implements UserDetailsService {
     public int getRoles(String username) {
         Users user = repoUser.findByUsername(username);
         if (user == null) {
-            return 1;
+            return -1;
         }
         if(user.getRoles() == 0) {
             return 0;
+        } else if(user.getRoles() == 1){
+            return 1;
         }
-        return 1;
+        return -1;
     }
     // Forget Password
     public void forgotPassword(String email) {
