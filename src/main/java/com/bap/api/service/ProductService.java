@@ -30,7 +30,7 @@ public class ProductService {
      * 
      * @return
      */
-    public List<Products> findAll() {
+    public  Iterable<Products> findAll() {
         return repoProduct.findAll();
     }
 

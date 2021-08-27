@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bap.api.model.dto.ProductDTO;
 import com.bap.api.model.entity.Products;
 import com.bap.api.service.ProductService;
 
@@ -69,7 +70,16 @@ public class ProductController {
     public ResponseEntity<Products> createProduct(@RequestBody Products products) {
         return new ResponseEntity<>(ProductService.save(products), HttpStatus.OK);
     }
-
+    @PostMapping("/add")
+    /**
+     * This is a method to add a product
+     *
+     * @param products
+     * @return
+     */
+    public ResponseEntity<Products> newProduct(@RequestBody ProductDTO products) {
+        return new ResponseEntity<>(ProductService.postProduct(products), HttpStatus.OK);
+    }
     @PutMapping("/editPro/{id}")
     /**
      * This is a method to edit product by id

@@ -1,7 +1,5 @@
 package com.bap.api.model.entity;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,21 +19,21 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Payments implements Serializable{
+public class Payments{
 
     @Id
     @Column(name = "id_paid")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne
     
-    @JoinColumn(name = "id_product")
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @ManyToOne
+    @JoinColumn(name = "id_product", nullable=false)
+//    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Products products;
 
     @ManyToOne
-    @JoinColumn(name = "id_user")
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JoinColumn(name = "id_user", nullable=false)
+//    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Users users;
     
     @Column(name = "quantity")

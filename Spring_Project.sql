@@ -45,25 +45,7 @@ insert into PRODUCTS (product_name,product_type,image,sale,quantity,price,descri
  values('Gấu Bông Trái Cây Thú Bông Ngộ Nghĩnh Sầu riêng','2','https://i.ibb.co/zZpx5TY/saurieng.jpg',0,100,275000,'Gấu bông siêu mềm mịn, không xù an toàn cho cả người lớn và trẻ em');
  insert into PRODUCTS (product_name,product_type,image,sale,quantity,price,descriptions)
  values('Gối Gấu Bông Trái Cây Thú Bông Ngộ Nghĩnh Kiwwi','2','https://i.ibb.co/D59hZTC/kiwi.jpg',0,0,260000,'Gấu bông có đường may chắc chắn, độ bền cao, an toàn cho người sử dụng.');
- insert into PRODUCTS (product_name,product_type,image,sale,quantity,price,descriptions)
- values('STRIPED BUFFALO SHIRT','Trâu Bông','https://bitsofco.de/content/images/2018/12/broken-1.png',10,100,200000,'Chất liệu an toàn không gấy kích ứng da');
-  insert into PRODUCTS (product_name,product_type,image,sale,quantity,price,descriptions)
- values('STRIPED BUFFALO SHIRT','Trâu Bông','https://bitsofco.de/content/images/2018/12/broken-1.png',10,100,200000,'Chất liệu an toàn không gấy kích ứng da');
-  insert into PRODUCTS (product_name,product_type,image,sale,quantity,price,descriptions)
- values('STRIPED BUFFALO SHIRT','Trâu Bông','https://bitsofco.de/content/images/2018/12/broken-1.png',10,100,200000,'Chất liệu an toàn không gấy kích ứng da');
-  insert into PRODUCTS (product_name,product_type,image,sale,quantity,price,descriptions)
- values('STRIPED BUFFALO SHIRT','Trâu Bông','https://bitsofco.de/content/images/2018/12/broken-1.png',10,100,200000,'Chất liệu an toàn không gấy kích ứng da');
-  insert into PRODUCTS (product_name,product_type,image,sale,quantity,price,descriptions)
- values('STRIPED BUFFALO SHIRT','Trâu Bông','https://bitsofco.de/content/images/2018/12/broken-1.png',10,100,200000,'Chất liệu an toàn không gấy kích ứng da');
-  insert into PRODUCTS (product_name,product_type,image,sale,quantity,price,descriptions)
- values('STRIPED BUFFALO SHIRT','Trâu Bông','https://bitsofco.de/content/images/2018/12/broken-1.png',10,100,200000,'Chất liệu an toàn không gấy kích ứng da');
-  insert into PRODUCTS (product_name,product_type,image,sale,quantity,price,descriptions)
- values('STRIPED BUFFALO SHIRT','Trâu Bông','https://bitsofco.de/content/images/2018/12/broken-1.png',10,100,200000,'Chất liệu an toàn không gấy kích ứng da');
-  insert into PRODUCTS (product_name,product_type,image,sale,quantity,price,descriptions)
- values('STRIPED BUFFALO SHIRT','Trâu Bông','https://bitsofco.de/content/images/2018/12/broken-1.png',10,100,200000,'Chất liệu an toàn không gấy kích ứng da');
-  insert into PRODUCTS (product_name,product_type,image,sale,quantity,price,descriptions)
- values('STRIPED BUFFALO SHIRT','Trâu Bông','https://bitsofco.de/content/images/2018/12/broken-1.png',10,100,200000,'Chất liệu an toàn không gấy kích ứng da');
----------------------------------------------------------
+ ---------------------------------------------------------
 create table USERS (
     id_user int primary key auto_increment UNIQUE,
     user_name varchar(20) NOT NULL UNIQUE,
@@ -77,6 +59,8 @@ create table USERS (
     );
 insert into USERS (id_user,user_name,full_name,password,email,phone, address, status, roles) values
  (1, 'admin','admin','$2a$10$sopEWnd9jx6nKZNowe5TpukYE62CGhKBnIkU20AneNesoFbAQpIpu','tuan.pham22@student.passerellesnumeriques.org',0799101759,'DANANG','active', 0);
+ insert into USERS (user_name,full_name,password,email,phone, address, status, roles) values
+ ('user','Phạm Anh Tuấn','$2a$10$sopEWnd9jx6nKZNowe5TpukYE62CGhKBnIkU20AneNesoFbAQpIpu','lilpham987@gmail.com',0915810375,'DANANG','active', 1);
 insert into USERS (user_name,full_name,password,email,phone, address, status, roles) values
  ('Kha','Nguyen Dinh kha','$2a$10$sopEWnd9jx6nKZNowe5TpukYE62CGhKBnIkU20AneNesoFbAQpIpu','kha.nguyen22@student.passerellesnumeriques.org',0915810375,'DANANG','active', 1);
 insert into USERS (user_name,full_name,password,email,phone, address, status, roles) values

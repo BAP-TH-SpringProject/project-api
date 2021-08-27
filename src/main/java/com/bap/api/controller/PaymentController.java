@@ -41,18 +41,14 @@ public class PaymentController {
      *
      * @return
      */
-    public ResponseEntity<List<Payments>> getListUser() {
-        return new ResponseEntity<>((List<Payments>) PaymentService.findAll(), HttpStatus.OK);
-
+    public List<Payments> getListPayment() {
+        List<Payments> payments = new ArrayList<Payments>();
+        List<Payments> result = PaymentService.findAll();
+        for (Payments item : result) {
+            payments.add(item);
+        }
+        return payments;
     }
-//    public List<Payments> getListPayment() {
-//        List<Payments> payments = new ArrayList<Payments>();
-//        List<Payments> result = PaymentService.findAll();
-//        for (Payments item : result) {
-//            payments.add(item);
-//        }
-//        return payments;
-//    }
 
     @GetMapping("/payment/{id}")
     /**
@@ -80,6 +76,42 @@ public class PaymentController {
         return new ResponseEntity<>(PaymentService.save(payments), HttpStatus.OK);
     }
 
+    @GetMapping("/payments/confirm/{id}")
+    /**
+     * This is a method to add a payment
+     *
+     * @param payments
+     * @return
+     */
+//    public ResponseEntity<Payments> confirm(@PathVariable("id") Long id) {
+//        return new ResponseEntity<>(PaymentService.confirm(id), HttpStatus.OK);
+//    }
+//    
+    public boolean confirm(@PathVariable("id") Long id) {
+        try {
+            PaymentService.confirm(id);
+            return true; 
+        } catch (Exception e) {
+            return false;
+        }
+       
+    }
+    @GetMapping("payments/cancel/{id}")
+    /**
+     * This is a method to add a payment
+     *
+     * @param payments
+     * @return
+     */
+    public boolean cancel(@PathVariable("id") Long id) {
+        try {
+            PaymentService.cancel(id);
+            return true; 
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    
     @PutMapping("/editPay/{id}")
     /**
      *
