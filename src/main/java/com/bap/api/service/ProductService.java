@@ -1,7 +1,6 @@
 package com.bap.api.service;
 
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,7 +70,6 @@ public class ProductService {
      */
     public void update(Long id, Products products) {
         repoProduct.save(products);
-
     }
 
     public Products postProduct(ProductDTO product) {
@@ -79,6 +77,7 @@ public class ProductService {
         newProduct.setProductName(product.getProductName());
         newProduct.setProductType(product.getProductType());
         newProduct.setImage(product.getImage());
+        newProduct.setQuantity(product.getQuantity());
         newProduct.setPrice(product.getPrice());
         newProduct.setSale(product.getSale());
         newProduct.setDescriptions(product.getDescriptions());

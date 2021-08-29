@@ -101,7 +101,6 @@ public class UserController {
     public boolean banUser(@PathVariable("id") Long id) {
         try {
             Userservice.banUser(id);
-            System.out.println(id);
             return true; 
         } catch (Exception e) {
             return false;

@@ -82,7 +82,6 @@ public class UserService {
         }
         System.out.println("Status: "+user.getStatus());
         repoUser.save(user);
-//        sendEmail.sendHtmlEmail("123","123","123");
     }
 
     public void delete(Long id) {

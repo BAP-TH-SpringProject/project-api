@@ -8,9 +8,12 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.bap.api.model.dto.PaymentDTO;
 import com.bap.api.model.entity.Payments;
+import com.bap.api.model.entity.Products;
 import com.bap.api.model.entity.Users;
 import com.bap.api.repository.PaymentRepository;
+import com.bap.api.repository.ProductRepository;
 import com.bap.api.repository.UserRepository;
 
 
@@ -22,6 +25,10 @@ public class PaymentService {
     
     @Autowired
     private UserRepository repoUser;
+    
+    @Autowired
+    private ProductRepository repoProduct;
+    
     @Autowired
     private EmailService sendEmail;
     /**
@@ -37,8 +44,20 @@ public class PaymentService {
      * @param payments
      * @return
      */
-    public Payments save(Payments payments) {
-        return repoPayment.save(payments);
+    public Payments save(PaymentDTO payment) {
+        System.out.println("PaymentDTO: "+payment);
+        Payments newPayment = new Payments();
+        Users user = repoUser.findByID(payment.getIdUser());
+        System.out.println(user);
+        Products product = repoProduct.findByID(payment.getIdProduct());
+        System.out.println(product);
+        newPayment.setUsers(user);
+        newPayment.setProducts(product);
+        newPayment.setPaymentMethod(payment.getPaymentMethod());
+        newPayment.setQuantity(payment.getQuantity());
+        newPayment.setTotal(payment.getTotal());
+        newPayment.setStatus("pending");
+        return repoPayment.save(newPayment);
     }
 
     /**

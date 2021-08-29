@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bap.api.model.dto.PaymentDTO;
 import com.bap.api.model.entity.Payments;
 import com.bap.api.model.entity.Users;
 import com.bap.api.service.PaymentService;
@@ -72,7 +74,7 @@ public class PaymentController {
      * @param payments
      * @return
      */
-    public ResponseEntity<Payments> createPayment(@ModelAttribute Payments payments) {
+    public ResponseEntity<Payments> createPayment(@RequestBody PaymentDTO payments) {
         return new ResponseEntity<>(PaymentService.save(payments), HttpStatus.OK);
     }
 
@@ -83,10 +85,6 @@ public class PaymentController {
      * @param payments
      * @return
      */
-//    public ResponseEntity<Payments> confirm(@PathVariable("id") Long id) {
-//        return new ResponseEntity<>(PaymentService.confirm(id), HttpStatus.OK);
-//    }
-//    
     public boolean confirm(@PathVariable("id") Long id) {
         try {
             PaymentService.confirm(id);
@@ -96,6 +94,7 @@ public class PaymentController {
         }
        
     }
+    
     @GetMapping("payments/cancel/{id}")
     /**
      * This is a method to add a payment
@@ -110,22 +109,6 @@ public class PaymentController {
         } catch (Exception e) {
             return false;
         }
-    }
-    
-    @PutMapping("/editPay/{id}")
-    /**
-     *
-     * @param id
-     * @param payments
-     * @return
-     */
-    public ResponseEntity<Payments> updatePayment(@PathVariable("id") Long id, @ModelAttribute Payments payments) {
-        Optional<Payments> productOptional = PaymentService.findById(id);
-        return (ResponseEntity<Payments>) productOptional.map(payment1 -> {
-            payments.setId(payment1.getId());
-            return new ResponseEntity<>(PaymentService.save(payments), HttpStatus.OK);
-        }).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
-
     }
 
     @DeleteMapping("/deletePay/{id}")
