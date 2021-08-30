@@ -16,8 +16,8 @@ import com.bap.api.model.entity.Notifications;
 import com.bap.api.service.NoticeService;
 
 @RestController
-//@RequestMapping("/not-auth")
-@RequestMapping("/admin")
+@RequestMapping("/not-auth")
+//@RequestMapping("/admin")
 public class NotificationsController {
     @Autowired
     private NoticeService notice;

@@ -111,6 +111,8 @@ public class JwtUserDetailsService implements UserDetailsService {
         // set password is encrypted
         newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
         newUser.setPhone(user.getPhone());
+        newUser.setRoles(1);
+        newUser.setStatus("active");
         newUser.setAddress(user.getAddress());
         return repoUser.save(newUser);
     }

@@ -68,8 +68,27 @@ public class ProductService {
      * @param id
      * @param products
      */
-    public void update(Long id, Products products) {
-        repoProduct.save(products);
+    public Products updateProduct(ProductDTO product, Long id) {
+        
+        Products newProduct = repoProduct.findByID(id);
+        if(product.getProductName() != null)
+        newProduct.setProductName(product.getProductName());
+        
+        if(product.getProductType() != null)
+        newProduct.setProductType(product.getProductType());
+        
+        if(product.getImage() != null)
+        newProduct.setImage(product.getImage());
+        
+        newProduct.setQuantity(product.getQuantity());
+
+        newProduct.setPrice(product.getPrice());
+        
+        newProduct.setSale(product.getSale());
+        if(product.getDescriptions() != null)
+        newProduct.setDescriptions(product.getDescriptions());
+        
+        return repoProduct.save(newProduct);
     }
 
     public Products postProduct(ProductDTO product) {
